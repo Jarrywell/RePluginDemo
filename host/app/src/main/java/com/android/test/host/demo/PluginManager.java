@@ -21,6 +21,7 @@ public class PluginManager {
         PLUGINS.put(PLUGIN1_NAME, new PluginExtra(PLUGIN1_NAME, "plugin1.apk", new String[] {
             "com.test.android.plugin1.MainActivity",
             "com.test.android.plugin1.InnerActivity",
+            "com.test.android.plugin1.ForResultActivity",
         }, new String[] {""}));
 
     }

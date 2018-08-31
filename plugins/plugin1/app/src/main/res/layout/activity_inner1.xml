@@ -5,13 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity"
+    tools:context=".InnerActivity"
     >
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:text="这是插件内部启动的Activity"
+        android:gravity="center"
+        android:layout_weight="1"
         />
+
+    <fragment
+        android:id="@+id/fragment"
+        android:layout_weight="1"
+        android:gravity="center"
+        class="com.test.android.plugin1.fragment.Plugin1Demo1Fragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
 
 </LinearLayout>
