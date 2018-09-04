@@ -25,19 +25,115 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".InnerActivity" android:process=":plugin1">
+        <activity android:name=".activity.InnerActivity" android:process=":plugin1">
             <intent-filter>
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".ForResultActivity" android:process=":plugin2">
+        <activity android:name=".activity.ForResultActivity" android:process=":plugin2">
             <intent-filter>
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--standard-->
+        <activity android:name=".activity.standard.StandardActivity"
+            android:label="@string/app_name"
+            android:launchMode="standard"
+            android:screenOrientation="unspecified"
+            android:alwaysRetainTaskState="true"
+            android:uiOptions="splitActionBarWhenNarrow"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|mcc|mnc|uiMode"
+            android:resizeableActivity="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!--singleTop-->
+        <activity android:name=".activity.single_top.SingleTopActivity1"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:screenOrientation="unspecified"
+            android:alwaysRetainTaskState="true"
+            android:uiOptions="splitActionBarWhenNarrow"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|mcc|mnc|uiMode"
+            android:resizeableActivity="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!--singleTask-->
+        <activity android:name=".activity.single_task.SingleTaskActivity1"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified"
+            android:alwaysRetainTaskState="true"
+            android:uiOptions="splitActionBarWhenNarrow"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|mcc|mnc|uiMode"
+            android:resizeableActivity="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!--singleInstance-->
+        <activity android:name=".activity.single_instance.SingleInstanceActivity1"
+            android:label="@string/app_name"
+            android:launchMode="singleInstance"
+            android:screenOrientation="unspecified"
+            android:alwaysRetainTaskState="true"
+            android:uiOptions="splitActionBarWhenNarrow"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|mcc|mnc|uiMode"
+            android:resizeableActivity="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!--intent-filter-->
+        <activity android:name=".activity.intent_filter.IntentFlterActivity1"
+            android:label="@string/app_name"
+            android:launchMode="standard"
+            android:screenOrientation="unspecified"
+            android:alwaysRetainTaskState="true"
+            android:uiOptions="splitActionBarWhenNarrow"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|mcc|mnc|uiMode"
+            android:resizeableActivity="false"
+            android:windowSoftInputMode="adjustResize">
+
+            <intent-filter>
+                <action android:name="android.intent.action.plugin1" />
+                <category android:name="category_plugin1" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!--notification-->
+        <activity android:name=".activity.notification.NotificationActivity" />
+
+        <!--preference-->
+        <activity android:name=".activity.preference.PreferenceActivity1"/>
+
+
+        <!--task-affinity-->
+        <activity android:name=".activity.task_affinity.TA1Activity1"
+            android:label="TA1Activity1"
+            android:launchMode="singleTask"
+            android:taskAffinity=":ta_1"/>
+
+        <activity android:name=".activity.task_affinity.TA1Activity2"
+            android:label="TA1Activity2"
+            android:launchMode="singleTask"
+            android:taskAffinity=":ta_1"/>
+
+        <activity android:name=".activity.task_affinity.TA2Activity3"
+            android:label="TA2Activity3"
+            android:launchMode="singleTask"
+            android:taskAffinity=":ta_2"/>
+
+        <activity android:name=".activity.task_affinity.TA2Activity4"
+            android:label="TA2Activity4"
+            android:launchMode="singleTask"
+            android:taskAffinity=":ta_2"/>
+
+
+        <!--theme-->
+        <!--android:theme="@style/Pluing1Theme"-->
+        <activity android:name=".activity.theme.ThemeActivity1" />
+
     </application>
 
 </manifest>

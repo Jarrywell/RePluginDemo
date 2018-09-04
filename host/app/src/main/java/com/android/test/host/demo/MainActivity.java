@@ -61,6 +61,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.btn_plugin1_intent_filter).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("android.intent.action.plugin1");
+                intent.addCategory("category_plugin1");
+                PluginManager.PluginExtra info = PluginManager.PLUGINS.get(PluginManager.PLUGIN1_NAME);
+                RePlugin.startActivity(MainActivity.this, intent, info.pluginName, null);
+
+            }
+        });
+
 
     }
 

@@ -1,4 +1,7 @@
-package com.test.android.plugin1;
+package com.test.android.plugin1.activity;
+
+import com.test.android.plugin1.DLog;
+import com.test.android.plugin1.R;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

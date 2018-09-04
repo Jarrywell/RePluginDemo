@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#ffff0000"
+        android:textAllCaps="false"
         android:text="这是插件内部启动的Frgment"
         />
 

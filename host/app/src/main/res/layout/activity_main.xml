@@ -20,6 +20,7 @@
             android:id="@+id/btn_plugin1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAllCaps="false"
             android:text="启动插件1"
             android:layout_marginBottom="10dp"
             />
@@ -28,6 +29,7 @@
             android:id="@+id/btn_plugin1_inner_activity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAllCaps="false"
             android:text="启动插件新进程"
             android:layout_marginBottom="10dp"
             />
@@ -36,6 +38,7 @@
             android:id="@+id/btn_plugin1_result_activity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAllCaps="false"
             android:text="测试插件的forResult()"
             android:layout_marginBottom="10dp"
             />
@@ -44,7 +47,17 @@
             android:id="@+id/btn_plugin1_fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAllCaps="false"
             android:text="测试插件中的Fragment"
+            android:layout_marginBottom="10dp"
+            />
+
+        <Button
+            android:id="@+id/btn_plugin1_intent_filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="测试插件中的Intent-Filter"
             android:layout_marginBottom="10dp"
             />
     </LinearLayout>

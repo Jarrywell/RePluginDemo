@@ -1,4 +1,4 @@
-package com.test.android.plugin1;
+package com.test.android.plugin1.activity;
 
 import android.content.Intent;
 import android.os.Bundle;

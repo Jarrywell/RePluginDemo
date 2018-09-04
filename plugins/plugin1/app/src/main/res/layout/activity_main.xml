@@ -12,7 +12,88 @@
         android:id="@+id/id_btn_start_inner_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAllCaps="false"
         android:text="启动插件内部Activity"
+        />
+
+    <Button
+        android:id="@+id/id_btn_start_host_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="启动宿主Activity"
+        />
+
+    <Button
+        android:id="@+id/id_btn_start_standard_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="启动standard类型的Activity"
+        />
+
+    <Button
+        android:id="@+id/id_btn_start_single_top_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="启动SingleTop类型的Activity"
+        />
+
+    <Button
+        android:id="@+id/id_btn_start_single_task_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="启动SingleTask类型的Activity"
+        />
+
+    <Button
+        android:id="@+id/id_btn_start_single_instance_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="启动SingleInstance类型的Activity"
+        />
+
+    <Button
+        android:id="@+id/id_btn_start_intent_filter_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="通过intent-filter启动Activity"
+        />
+
+    <Button
+        android:id="@+id/id_btn_send_notification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="发送通知消息"
+        />
+
+    <Button
+        android:id="@+id/id_btn_start_preference_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="跳转到设置Activity"
+        />
+
+    <Button
+        android:id="@+id/id_btn_start_task_affinity_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="跳转到TaskAffinity Activity"
+        />
+
+    <Button
+        android:id="@+id/id_btn_start_theme_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="跳转到带自定义主题的Activity"
         />
 
 </LinearLayout>

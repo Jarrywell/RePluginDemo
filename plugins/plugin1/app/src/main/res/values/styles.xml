@@ -6,6 +6,10 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
     </style>
 
+    <!--<style name="Pluing1Theme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:background">#3300ff00</item>
+    </style>-->
 </resources>
