@@ -2,6 +2,7 @@ package com.android.test.host.demo;
 
 import com.qihoo360.replugin.RePlugin;
 import com.qihoo360.replugin.component.provider.PluginProviderClient;
+import com.qihoo360.replugin.component.service.PluginServiceClient;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -115,7 +116,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.id_btn_start_plugin_receiver).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String ACTION = "com.test.android.plugin1.receiver.ACTION1_TEST";
+                Intent intent = new Intent(ACTION);
+                intent.putExtra("extra", "this is extra test!!!");
 
+                sendBroadcast(intent);
+
+            }
+        });
+
+        findViewById(R.id.id_btn_start_plugin_service).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*PluginManager.PluginExtra info = PluginManager.PLUGINS.get(PluginManager.PLUGIN1_NAME);
+                Intent intent = RePlugin.createIntent(info.pluginName, info.services[0]);
+                PluginServiceClient.startService(MainActivity.this, intent);*/
+
+                Intent intent = new Intent("com.test.android.plugin1.service.action.SERVICE1");
+                Context pluginContext = RePlugin.fetchContext(PluginManager.PLUGIN1_NAME);
+                PluginServiceClient.startService(pluginContext, intent);
+            }
+        });
     }
 
     private final int REQUEST_CODE = 0x0111;

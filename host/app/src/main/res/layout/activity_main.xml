@@ -16,6 +16,17 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffff0000"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:text="这里是宿主界面!!!"
+            android:layout_marginBottom="10dp"
+            />
+
         <Button
             android:id="@+id/btn_plugin1"
             android:layout_width="match_parent"
@@ -77,6 +88,24 @@
             android:textAllCaps="false"
             android:layout_marginBottom="10dp"
             android:text="测试插件中的Provider读写数据"
+            />
+
+        <Button
+            android:id="@+id/id_btn_start_plugin_receiver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:layout_marginBottom="10dp"
+            android:text="测试插件中的广播(需先启动插件)"
+            />
+
+        <Button
+            android:id="@+id/id_btn_start_plugin_service"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:layout_marginBottom="10dp"
+            android:text="测试插件中的Service"
             />
     </LinearLayout>
 </ScrollView>

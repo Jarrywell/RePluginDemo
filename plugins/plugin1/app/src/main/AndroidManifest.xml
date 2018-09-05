@@ -155,6 +155,19 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/fileprovider_path" />
         </provider>
+
+        <!--静态注册广播-->
+        <receiver android:name=".receiver.Plugin1BroadcastReceiver">
+            <intent-filter>
+                <action android:name="com.test.android.plugin1.receiver.ACTION1_TEST" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".service.Plugin1Service1" android:process=":bg">
+            <intent-filter>
+                <action android:name="com.test.android.plugin1.service.action.SERVICE1" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

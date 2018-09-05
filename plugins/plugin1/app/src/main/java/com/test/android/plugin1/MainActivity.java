@@ -11,6 +11,8 @@ import com.test.android.plugin1.activity.notification.NotificationUtils;
 import com.test.android.plugin1.activity.task_affinity.TA1Activity1;
 import com.test.android.plugin1.activity.theme.ThemeActivity1;
 import com.test.android.plugin1.provider.FileProviderActivity;
+import com.test.android.plugin1.receiver.Plugin1BroadcastReceiver;
+import com.test.android.plugin1.service.Plugin1Service1;
 
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -157,6 +159,30 @@ public class MainActivity extends AppCompatActivity {
                     final Uri result = getContentResolver().insert(uri, cv);
                     DLog.d(TAG, "provider insert result: " + result);
                     Toast.makeText(v.getContext(), (result != null ? result.toString() : ""), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        findViewById(R.id.id_btn_start_plugin_receiver).setOnClickListener(
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Plugin1BroadcastReceiver.ACTION);
+                    intent.putExtra("extra", "this is extra test!!!");
+
+                    sendBroadcast(intent);
+                }
+            });
+
+
+        findViewById(R.id.id_btn_start_plugin_service).setOnClickListener(
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Intent intent = new Intent(MainActivity.this, Plugin1Service1.class);
+                    //startService(intent);
+
+                    Intent intent = new Intent("com.test.android.plugin1.service.action.SERVICE1");
+                    startService(intent);
                 }
             });
 
