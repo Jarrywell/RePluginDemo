@@ -26,6 +26,18 @@
             </intent-filter>
         </activity>
         <activity android:name=".DemoFragmentActivity" android:process=":host1"/>
+
+        <provider
+            android:name=".Plugin1FileProvider"
+            android:authorities="com.android.test.host.demo.plugin1.FILE_PROVIDER"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/fileprovider_path">
+            </meta-data>
+        </provider>
+
     </application>
 
 </manifest>

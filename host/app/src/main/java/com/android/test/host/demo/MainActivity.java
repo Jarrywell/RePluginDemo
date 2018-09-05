@@ -1,8 +1,12 @@
 package com.android.test.host.demo;
 
 import com.qihoo360.replugin.RePlugin;
+import com.qihoo360.replugin.component.provider.PluginProviderClient;
 
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -49,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * 测试动态加载插件中的fragment
+         */
         findViewById(R.id.btn_plugin1_fragment).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * 测试通过action启动插件中的activity
+         */
         findViewById(R.id.btn_plugin1_intent_filter).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,6 +79,39 @@ public class MainActivity extends AppCompatActivity {
                 PluginManager.PluginExtra info = PluginManager.PLUGINS.get(PluginManager.PLUGIN1_NAME);
                 RePlugin.startActivity(MainActivity.this, intent, info.pluginName, null);
 
+            }
+        });
+
+        /**
+         * 测试插件中的file provider
+         */
+        findViewById(R.id.btn_plugin1_file_provider).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PluginManager.PluginExtra info = PluginManager.PLUGINS.get(PluginManager.PLUGIN1_NAME);
+                RePlugin.startActivity(MainActivity.this, RePlugin.createIntent(info.pluginName, info.activitys[3]));
+            }
+        });
+
+
+        findViewById(R.id.id_btn_plugin1_provider).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String authorities = "com.android.test.host.demo.plugin1.TEST_PROVIDER";
+
+                Uri uri = Uri.parse("content://" + authorities + "/" + "test");
+                ContentValues cv = new ContentValues();
+                cv.put("name", "plugin1 demo");
+                cv.put("address", "beijing");
+
+                /**
+                 * 宿主操作插件中的provider时context必须要传插件中的context
+                 */
+                Context pluginContext = RePlugin.fetchContext(PluginManager.PLUGIN1_NAME);
+                final Uri result = PluginProviderClient.insert(pluginContext, uri, cv);
+                DLog.d(TAG, "provider insert result: " + result);
+
+                Toast.makeText(v.getContext(), (result != null ? result.toString() : ""), Toast.LENGTH_SHORT).show();
             }
         });
 

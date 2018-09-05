@@ -132,8 +132,29 @@
 
         <!--theme-->
         <!--android:theme="@style/Pluing1Theme"-->
-        <activity android:name=".activity.theme.ThemeActivity1" />
+        <!--android:theme="@android:style/Theme.Black.NoTitleBar"-->
+        <!--android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"-->
+        <!--android:theme="@style/Theme.AppCompat.Light.DarkActionBar"-->
+        <activity android:name=".activity.theme.ThemeActivity1" android:theme="@style/AppTheme" />
 
+
+        <!--provider-->
+        <provider
+            android:name=".provider.Plugin1Provider"
+            android:authorities="com.android.test.host.demo.plugin1.TEST_PROVIDER"/>
+
+
+        <activity android:name=".provider.FileProviderActivity" />
+        <!-- 以下provider，作为插件时，可注释掉；作为单独APK时需要声明-->
+        <provider
+            android:name=".provider.Plugin1FileProvider"
+            android:authorities="com.android.test.host.demo.plugin1.FILE_PROVIDER"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/fileprovider_path" />
+        </provider>
     </application>
 
 </manifest>

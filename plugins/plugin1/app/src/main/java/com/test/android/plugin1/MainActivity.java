@@ -10,12 +10,15 @@ import com.test.android.plugin1.activity.notification.NotificationActivity;
 import com.test.android.plugin1.activity.notification.NotificationUtils;
 import com.test.android.plugin1.activity.task_affinity.TA1Activity1;
 import com.test.android.plugin1.activity.theme.ThemeActivity1;
+import com.test.android.plugin1.provider.FileProviderActivity;
 
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -132,6 +135,30 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
+        findViewById(R.id.id_btn_start_file_provider_activity).setOnClickListener(
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(MainActivity.this, FileProviderActivity.class));
+                }
+            });
+
+        findViewById(R.id.id_btn_start_provider).setOnClickListener(
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final String authorities = "com.android.test.host.demo.plugin1.TEST_PROVIDER";
+
+                    Uri uri = Uri.parse("content://" + authorities + "/" + "test");
+                    ContentValues cv = new ContentValues();
+                    cv.put("name", "plugin1 demo");
+                    cv.put("address", "beijing");
+
+                    final Uri result = getContentResolver().insert(uri, cv);
+                    DLog.d(TAG, "provider insert result: " + result);
+                    Toast.makeText(v.getContext(), (result != null ? result.toString() : ""), Toast.LENGTH_SHORT).show();
+                }
+            });
 
     }
 

@@ -22,6 +22,7 @@ public class PluginManager {
             "com.test.android.plugin1.MainActivity",
             "com.test.android.plugin1.activity.InnerActivity",
             "com.test.android.plugin1.activity.ForResultActivity",
+            "com.test.android.plugin1.provider.FileProviderActivity",
         }, new String[] {""}));
 
     }
