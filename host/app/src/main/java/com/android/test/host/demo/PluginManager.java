@@ -18,6 +18,8 @@ public class PluginManager {
 
     public static final String PLUGIN1_NAME = "plugin1";
 
+    public static final String PLUGIN2_NAME = "plugin2";
+
     public static final Map<String, PluginExtra> PLUGINS = new HashMap<>();
 
     static {
@@ -27,6 +29,9 @@ public class PluginManager {
             "com.test.android.plugin1.activity.ForResultActivity",
             "com.test.android.plugin1.provider.FileProviderActivity",
         }, new String[] {"com.test.android.plugin1.service.Plugin1Service1"}));
+
+        PLUGINS.put(PLUGIN2_NAME, new PluginExtra(PLUGIN2_NAME, "plugin2.apk",
+            new String[] {}, new String[] {}));
 
     }
 

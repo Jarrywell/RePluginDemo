@@ -107,5 +107,23 @@
             android:layout_marginBottom="10dp"
             android:text="测试插件中的Service"
             />
+
+        <Button
+            android:id="@+id/id_btn_start_plugin2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:layout_marginBottom="10dp"
+            android:text="启动插件2"
+            />
+
+        <Button
+            android:id="@+id/id_btn_test_plugin2_binder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:layout_marginBottom="10dp"
+            android:text="测试插件2中的Binder(需先启动插件2)"
+            />
     </LinearLayout>
 </ScrollView>

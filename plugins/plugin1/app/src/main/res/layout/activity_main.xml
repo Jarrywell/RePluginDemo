@@ -25,7 +25,7 @@
             android:textAllCaps="false"
             android:textSize="20sp"
             android:gravity="center"
-            android:text="这里是插件界面!!!"
+            android:text="这里是插件1界面!!!"
             android:layout_marginBottom="10dp"
             />
 

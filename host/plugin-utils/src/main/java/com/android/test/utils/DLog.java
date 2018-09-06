@@ -18,24 +18,35 @@ public class DLog {
     public final static String TAG = "Host-Plugin";
 
     public static int d(String tag, String msg) {
-        return Log.d(TAG, format(tag, msg));
+        return Log.d(tag(), format(tag, msg));
     }
 
     public static int d(String tag, String msg, Throwable tr) {
-        return Log.d(TAG, format(tag, msg), tr);
+        return Log.d(tag(), format(tag, msg), tr);
     }
 
     public static int i(String tag, String msg) {
-        return Log.i(TAG, format(tag, msg));
+        return Log.i(tag(), format(tag, msg));
     }
 
     public static int i(String tag, String msg, Throwable tr) {
-        return Log.i(TAG, format(tag, msg), tr);
+        return Log.i(tag(), format(tag, msg), tr);
     }
 
 
     private static String format(String tag, String msg) {
         return "[" + tag + "][" + getCurrentProcessName() + "-" + Thread.currentThread().getId() + "]:" + msg;
+    }
+
+    private static String sTag = "";
+    public static void setTag(String tag) {
+        if (TextUtils.isEmpty(sTag)) {
+            sTag = tag;
+        }
+    }
+
+    private static String tag() {
+        return !TextUtils.isEmpty(sTag) ? sTag : TAG;
     }
 
     private static String sCurrentProcess;

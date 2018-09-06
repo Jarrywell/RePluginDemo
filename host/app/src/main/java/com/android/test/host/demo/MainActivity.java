@@ -5,11 +5,13 @@ import com.android.test.utils.TimeUtils;
 import com.qihoo360.replugin.RePlugin;
 import com.qihoo360.replugin.component.provider.PluginProviderClient;
 import com.qihoo360.replugin.component.service.PluginServiceClient;
+import com.test.android.plugin2.IPlugin2Request;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,9 +25,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /**
-         *
-         */
         DLog.i(TAG, "host test plugin-utils class: " + TimeUtils.getNowString());
 
         /**
@@ -145,6 +144,35 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent("com.test.android.plugin1.service.action.SERVICE1");
                 Context pluginContext = RePlugin.fetchContext(PluginManager.PLUGIN1_NAME);
                 PluginServiceClient.startService(pluginContext, intent);
+            }
+        });
+
+        /**
+         * 启动插件2中的activity
+         */
+        findViewById(R.id.id_btn_start_plugin2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("android.intent.action.plugin2"); //plugin2->MainActivity
+                RePlugin.startActivity(MainActivity.this, intent, PluginManager.PLUGIN2_NAME, null);
+            }
+        });
+
+        findViewById(R.id.id_btn_test_plugin2_binder).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IBinder b = RePlugin.fetchBinder(PluginManager.PLUGIN2_NAME, "plugin2-binder-test");
+                if (b == null) {
+                    DLog.i(TAG, "fetchBinder() of plugin2-binder-test is null!!!");
+                    return;
+                }
+                IPlugin2Request request = IPlugin2Request.Stub.asInterface(b);
+                try {
+                    boolean result = request.requestPluginName("宿主获取插件2中的binder");
+                    DLog.i(TAG, "requestPluginName() result: " + result);
+                } catch (Exception e) {
+                    DLog.i(TAG, "requestPluginName() exception!!", e);
+                }
             }
         });
     }

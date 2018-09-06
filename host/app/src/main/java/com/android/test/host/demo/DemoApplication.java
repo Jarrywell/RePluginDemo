@@ -32,8 +32,11 @@ public class DemoApplication extends RePluginApplication {
 
     @Override
     protected void attachBaseContext(Context base) {
+        /**
+         * 设置日志打印自定可以tag
+         */
+        DLog.setTag("Host");
         super.attachBaseContext(base);
-
         DLog.i(TAG, "attachBaseContext()");
     }
 

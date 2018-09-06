@@ -1,6 +1,7 @@
 package com.test.android.plugin1;
 
 import com.android.test.utils.DLog;
+import com.android.test.utils.TimeUtils;
 import com.test.android.plugin1.activity.InnerActivity;
 import com.test.android.plugin1.activity.preference.PreferenceActivity1;
 import com.test.android.plugin1.activity.single_instance.SingleInstanceActivity1;
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         DLog.i(TAG, "onCreate()");
+
+        DLog.i(TAG, "plugin test plugin-utils class: " + TimeUtils.getNowString());
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(ACTION_NOTIFICATION_TEST);
