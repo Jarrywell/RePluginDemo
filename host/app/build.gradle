@@ -9,7 +9,19 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters 'armeabi'
+        }
     }
+
+    sourceSets {
+        main {
+            //java.srcDirs = ['src/main/java/src-sdk-export', 'src/main/java/src-sdk-tests']
+            jniLibs.srcDirs = ['libs','src/main/jniLibs']
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false

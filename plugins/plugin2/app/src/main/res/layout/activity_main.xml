@@ -30,12 +30,12 @@
             />
 
         <Button
-            android:id="@+id/id_btn_start_service"
+            android:id="@+id/id_btn_start_jni"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAllCaps="false"
             android:layout_marginBottom="10dp"
-            android:text="启动插件内部service"
+            android:text="测试so库的调用"
             />
 
     </LinearLayout>

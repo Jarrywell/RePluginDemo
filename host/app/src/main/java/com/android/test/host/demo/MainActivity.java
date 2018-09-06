@@ -2,10 +2,12 @@ package com.android.test.host.demo;
 
 import com.android.test.utils.DLog;
 import com.android.test.utils.TimeUtils;
+import com.qihoo360.replugin.PluginDexClassLoader;
 import com.qihoo360.replugin.RePlugin;
 import com.qihoo360.replugin.component.provider.PluginProviderClient;
 import com.qihoo360.replugin.component.service.PluginServiceClient;
 import com.test.android.plugin2.IPlugin2Request;
+import com.test.android.plugin2.PluginString;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -16,6 +18,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import java.lang.reflect.Method;
 
 public class MainActivity extends AppCompatActivity {
     private final String TAG = "MainActivity";
@@ -100,7 +104,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        /**
+         * 测试插件中的provider
+         */
         findViewById(R.id.id_btn_plugin1_provider).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,6 +128,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * 测试插件中的广播
+         */
         findViewById(R.id.id_btn_start_plugin_receiver).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,6 +143,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * 通过action启动插件中的service
+         */
         findViewById(R.id.id_btn_start_plugin_service).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,6 +170,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * 测试插件中动态注册的binder
+         */
         findViewById(R.id.id_btn_test_plugin2_binder).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,6 +188,31 @@ public class MainActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     DLog.i(TAG, "requestPluginName() exception!!", e);
                 }
+            }
+        });
+
+        /**
+         * 测试调用插件中so库中的函数
+         */
+        findViewById(R.id.id_btn_test_plugin2_so).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    PluginDexClassLoader classLoader = (PluginDexClassLoader) RePlugin.fetchClassLoader(PluginManager.PLUGIN2_NAME);
+                    final String path = classLoader.findLibrary("plugin-string");
+                    DLog.i(TAG, "findLibrary result: " + path);
+
+                    Class<?> cls = classLoader.loadClass("com.test.android.plugin2.PluginString");
+                    Method method = cls.getDeclaredMethod("getString",long.class);
+                    Object result = method.invoke(null, 0);
+                    Toast.makeText(MainActivity.this, result.toString(), Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    DLog.i(TAG, "loadClass exception! ", e);
+                }
+
+                /*final String result = PluginString.getString(0);
+                DLog.i(TAG, "test jni string result: " + result);
+                Toast.makeText(MainActivity.this, result, Toast.LENGTH_LONG).show();*/
             }
         });
     }

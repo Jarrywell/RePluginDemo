@@ -125,5 +125,15 @@
             android:layout_marginBottom="10dp"
             android:text="测试插件2中的Binder(需先启动插件2)"
             />
+
+        <Button
+            android:id="@+id/id_btn_test_plugin2_so"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:layout_marginBottom="10dp"
+            android:text="调用插件2中so库中的方法"
+            />
+
     </LinearLayout>
 </ScrollView>
