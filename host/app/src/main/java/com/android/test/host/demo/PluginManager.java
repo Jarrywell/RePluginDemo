@@ -1,5 +1,7 @@
 package com.android.test.host.demo;
 
+import com.android.test.utils.annotations.Beta;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +10,7 @@ import java.util.Map;
  * author: libingyan
  * Date: 18-8-30 17:18
  */
+@Beta
 public class PluginManager {
 
 

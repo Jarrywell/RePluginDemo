@@ -79,4 +79,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     implementation 'com.qihoo360.replugin:replugin-host-lib:2.3.0'
+
+    implementation project(path: ':plugin-utils')
 }

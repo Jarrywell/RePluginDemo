@@ -1,10 +1,12 @@
 package com.test.android.plugin1.service;
 
-import com.test.android.plugin1.DLog;
+
+import com.android.test.utils.DLog;
 
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.support.annotation.Keep;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
 
@@ -13,6 +15,7 @@ import android.widget.Toast;
  * author: libingyan
  * Date: 18-9-5 17:40
  */
+@Keep
 public class Plugin1Service1 extends Service {
 
     private final String TAG = "Plugin1Service1";

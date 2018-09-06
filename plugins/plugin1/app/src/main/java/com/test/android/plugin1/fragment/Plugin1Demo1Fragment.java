@@ -1,11 +1,12 @@
 package com.test.android.plugin1.fragment;
 
+import com.android.test.utils.DLog;
 import com.qihoo360.replugin.RePlugin;
-import com.test.android.plugin1.DLog;
 import com.test.android.plugin1.R;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Keep;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
  * author: libingyan
  * Date: 18-8-30 20:54
  */
+@Keep
 public class Plugin1Demo1Fragment extends Fragment {
 
     private final String TAG = "Plugin1Demo1Fragment";

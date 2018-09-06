@@ -1,6 +1,7 @@
 package com.test.android.plugin1.receiver;
 
-import com.test.android.plugin1.DLog;
+
+import com.android.test.utils.DLog;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

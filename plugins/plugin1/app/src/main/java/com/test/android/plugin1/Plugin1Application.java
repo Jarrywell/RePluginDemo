@@ -1,5 +1,7 @@
 package com.test.android.plugin1;
 
+import com.android.test.utils.DLog;
+
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;

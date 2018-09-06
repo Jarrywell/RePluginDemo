@@ -1,7 +1,7 @@
 package com.test.android.plugin1.provider;
 
 
-import com.test.android.plugin1.DLog;
+import com.android.test.utils.DLog;
 import com.test.android.plugin1.R;
 
 import android.Manifest;
@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.Keep;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
@@ -30,6 +31,7 @@ import java.io.File;
  * author: libingyan
  * Date: 18-9-5 12:29
  */
+@Keep
 public class FileProviderActivity extends AppCompatActivity implements View.OnClickListener{
 
     private final String TAG = "FileProviderActivity";

@@ -1,5 +1,7 @@
 package com.android.test.host.demo;
 
+import com.android.test.utils.DLog;
+import com.android.test.utils.TimeUtils;
 import com.qihoo360.replugin.RePlugin;
 import com.qihoo360.replugin.component.provider.PluginProviderClient;
 import com.qihoo360.replugin.component.service.PluginServiceClient;
@@ -20,6 +22,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /**
+         *
+         */
+        DLog.i(TAG, "host test plugin-utils class: " + TimeUtils.getNowString());
 
         /**
          * 简单测试activity

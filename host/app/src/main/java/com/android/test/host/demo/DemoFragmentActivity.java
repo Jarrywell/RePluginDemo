@@ -1,9 +1,11 @@
 package com.android.test.host.demo;
 
+import com.android.test.utils.DLog;
 import com.qihoo360.replugin.RePlugin;
 
 import android.content.ComponentName;
 import android.os.Bundle;
+import android.support.annotation.Keep;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -13,6 +15,7 @@ import android.support.v4.app.FragmentActivity;
  * author: libingyan
  * Date: 18-8-30 20:46
  */
+@Keep
 public class DemoFragmentActivity extends FragmentActivity {
 
     private final String TAG = "DemoFragmentActivity";

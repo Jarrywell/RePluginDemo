@@ -1,6 +1,6 @@
 package com.test.android.plugin1.provider;
 
-import com.test.android.plugin1.DLog;
+import com.android.test.utils.DLog;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;

@@ -1,5 +1,6 @@
 package com.android.test.host.demo;
 
+import com.android.test.utils.DLog;
 import com.qihoo360.replugin.PluginDexClassLoader;
 import com.qihoo360.replugin.RePlugin;
 import com.qihoo360.replugin.RePluginCallbacks;

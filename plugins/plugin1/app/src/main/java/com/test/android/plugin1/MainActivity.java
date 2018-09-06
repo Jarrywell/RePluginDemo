@@ -1,5 +1,6 @@
 package com.test.android.plugin1;
 
+import com.android.test.utils.DLog;
 import com.test.android.plugin1.activity.InnerActivity;
 import com.test.android.plugin1.activity.preference.PreferenceActivity1;
 import com.test.android.plugin1.activity.single_instance.SingleInstanceActivity1;
@@ -21,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
+import android.support.annotation.Keep;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -30,6 +32,7 @@ import android.widget.Toast;
 import static com.test.android.plugin1.activity.notification.NotificationUtils.ACTION_NOTIFICATION_TEST;
 import static com.test.android.plugin1.activity.notification.NotificationUtils.NOTIFICATION_EXTRA;
 
+@Keep
 public class MainActivity extends AppCompatActivity {
 
     private final static String TAG = "MainActivity";

@@ -1,5 +1,6 @@
 package com.android.test.host.demo;
 
+import com.android.test.utils.DLog;
 import com.qihoo360.replugin.RePluginEventCallbacks;
 import com.qihoo360.replugin.model.PluginInfo;
 

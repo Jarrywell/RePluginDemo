@@ -2,6 +2,7 @@ package com.test.android.plugin1.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Keep;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
@@ -10,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
  * author: libingyan
  * Date: 18-8-30 20:18
  */
+@Keep
 public class ForResultActivity extends AppCompatActivity {
     private final static String TAG = "ForResultActivity";
 

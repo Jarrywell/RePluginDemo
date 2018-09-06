@@ -41,5 +41,10 @@ dependencies {
      * 这个jar就是从Support-fragment中提取出来的并非特制包目的是为了骗过编译期
      */
     //provided files('libs/fragment.jar')
+
+    /**
+     * 插件引用宿主类的方式
+     */
+    compileOnly files('libs/plugin-utils-lib-1.0.0.jar')
 }
 
