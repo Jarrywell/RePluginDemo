@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class MainActivity extends AppCompatActivity {
@@ -197,6 +198,10 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.id_btn_test_plugin2_so).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                /**
+                 * 调用方式一:反射调用插件中so对应的java方法,成功
+                 */
                 try {
                     PluginDexClassLoader classLoader = (PluginDexClassLoader) RePlugin.fetchClassLoader(PluginManager.PLUGIN2_NAME);
                     final String path = classLoader.findLibrary("plugin-string");
@@ -210,9 +215,71 @@ public class MainActivity extends AppCompatActivity {
                     DLog.i(TAG, "loadClass exception! ", e);
                 }
 
-                /*final String result = PluginString.getString(0);
+                String filename = System.mapLibraryName("plugin-string");
+                DLog.i(TAG, "mapLibraryName filename: " + filename);
+
+                /**
+                 * 测试二:
+                 * 模拟System.loadLibrary("plugin-string"),
+                 * public static void loadLibrary(String libname) {
+                 *      Runtime.getRuntime().loadLibrary0(VMStack.getCallingClassLoader(), libname);
+                 * }
+                 *
+                 * dalvik.system.VMStack.getCallingClassLoader(),返回的ClassLoader不是RePluginClassLoader,而是系统的PathClassLoader!!!!
+                 *
+                 */
+                try {
+                    Class<?> vmStackClass = Class.forName("dalvik.system.VMStack");
+                    Method vmMethod = vmStackClass.getDeclaredMethod("getCallingClassLoader");
+                    vmMethod.setAccessible(true);
+                    final Object vmResult = vmMethod.invoke(null);
+                    DLog.i(TAG, "vmResult: " + vmResult);
+                } catch (Exception e) {
+                    DLog.i(TAG, "VMStack exception! ", e);
+                }
+                DLog.i(TAG, "getClassLoader(): " + getClassLoader());
+
+                /**
+                 *
+                 * 测试三: 失败
+                 *
+                 * 模拟Runtime.getRuntime().loadLibrary0(classLoader, libname);但是将classLoader替换成插件的classLoader
+                 *
+                 * so库Loader成功,但是调用PluginString.getString()抛出如下异常:
+                 *
+                 * 09-06 20:05:44.399 E/AndroidRuntime(28414): java.lang.UnsatisfiedLinkError:
+                 * No implementation found for java.lang.String com.test.android.plugin2.PluginString.getString(long)
+                 * (tried Java_com_test_android_plugin2_PluginString_getString and Java_com_test_android_plugin2_PluginString_getString__J)
+                 *
+                 */
+                /*Runtime runtime = Runtime.getRuntime();
+                try {
+                    Method runntimeMethod = Runtime.class.getDeclaredMethod("loadLibrary0", ClassLoader.class, String.class);
+                    runntimeMethod.setAccessible(true);
+                    PluginDexClassLoader classLoader = (PluginDexClassLoader) RePlugin.fetchClassLoader(PluginManager.PLUGIN2_NAME);
+                    runntimeMethod.invoke(runtime, classLoader, "plugin-string");
+                } catch (InvocationTargetException e) {
+                    DLog.i(TAG, "Runtime exception! ", e.getTargetException());
+                }catch (Exception e) {
+                    DLog.i(TAG, "Runtime exception! ", e);
+                }
+                final String result = PluginString.getString(0);
                 DLog.i(TAG, "test jni string result: " + result);
                 Toast.makeText(MainActivity.this, result, Toast.LENGTH_LONG).show();*/
+
+                /**
+                 * 测试四: 失败
+                 * 直接将PluginString类从插件中拷贝过来,调System.loadLibrary("plugin-string")后,抛如下异常:
+                 * java.lang.UnsatisfiedLinkError: dalvik.system.PathClassLoader
+                 * [DexPathList[[zip file "/data/app/com.android.test.host.demo-1/base.apk"],
+                 * nativeLibraryDirectories=[/data/app/com.android.test.host.demo-1/lib/arm64, /system/lib64, /vendor/lib64]]]
+                 * couldn't find "libplugin-string.so
+                 *
+                 * classLoader仍然是原始的PathClassLoader导致加载不到so文件
+                 */
+                /*final String normal = PluginString.getString(0);
+                DLog.i(TAG, "test jni string result: " + normal);
+                Toast.makeText(MainActivity.this, normal, Toast.LENGTH_LONG).show();*/
             }
         });
     }

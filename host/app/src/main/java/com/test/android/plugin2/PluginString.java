@@ -1,9 +1,8 @@
 package com.test.android.plugin2;
 
-import com.qihoo360.replugin.RePlugin;
 
 /**
- * des:
+ * des: plugin2中拷贝过来
  * author: libingyan
  * Date: 18-9-6 17:45
  */
