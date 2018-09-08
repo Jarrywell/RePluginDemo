@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
                 /**
                  * 调用方式一:反射调用插件中so对应的java方法,成功
                  */
-                try {
+                /*try {
                     PluginDexClassLoader classLoader = (PluginDexClassLoader) RePlugin.fetchClassLoader(PluginManager.PLUGIN2_NAME);
                     final String path = classLoader.findLibrary("plugin-string");
                     DLog.i(TAG, "findLibrary result: " + path);
@@ -213,10 +213,13 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, result.toString(), Toast.LENGTH_LONG).show();
                 } catch (Exception e) {
                     DLog.i(TAG, "loadClass exception! ", e);
-                }
+                }*/
 
-                String filename = System.mapLibraryName("plugin-string");
-                DLog.i(TAG, "mapLibraryName filename: " + filename);
+                /**
+                 * 测试lib库名字的拼接
+                 */
+                /*String filename = System.mapLibraryName("plugin-string");
+                DLog.i(TAG, "mapLibraryName filename: " + filename);*/
 
                 /**
                  * 测试二:
@@ -228,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
                  * dalvik.system.VMStack.getCallingClassLoader(),返回的ClassLoader不是RePluginClassLoader,而是系统的PathClassLoader!!!!
                  *
                  */
-                try {
+                /*try {
                     Class<?> vmStackClass = Class.forName("dalvik.system.VMStack");
                     Method vmMethod = vmStackClass.getDeclaredMethod("getCallingClassLoader");
                     vmMethod.setAccessible(true);
@@ -237,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     DLog.i(TAG, "VMStack exception! ", e);
                 }
-                DLog.i(TAG, "getClassLoader(): " + getClassLoader());
+                DLog.i(TAG, "getClassLoader(): " + getClassLoader());*/
 
                 /**
                  *
@@ -280,6 +283,23 @@ public class MainActivity extends AppCompatActivity {
                 /*final String normal = PluginString.getString(0);
                 DLog.i(TAG, "test jni string result: " + normal);
                 Toast.makeText(MainActivity.this, normal, Toast.LENGTH_LONG).show();*/
+
+                /**
+                 * 测试五： 成功！！！
+                 * hook住插件的native加载目录
+                 */
+                boolean running = RePlugin.isPluginRunning(PluginManager.PLUGIN2_NAME);
+                if (!running) {
+                    if (!RePlugin.isPluginInstalled(PluginManager.PLUGIN2_NAME)) {
+                        RePlugin.install(PluginManager.PLUGINS.get(PluginManager.PLUGIN2_NAME).apkPath);
+                    }
+                    RePlugin.fetchClassLoader(PluginManager.PLUGIN2_NAME);
+                }
+                DLog.i(TAG, PluginManager.PLUGIN2_NAME + " running: " + running);
+
+                final String normal = PluginString.getString(0);
+                DLog.i(TAG, "test jni string result: " + normal);
+                Toast.makeText(MainActivity.this, normal, Toast.LENGTH_LONG).show();
             }
         });
     }

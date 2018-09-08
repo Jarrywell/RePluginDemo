@@ -1,5 +1,7 @@
 package com.test.android.plugin2;
 
+import com.qihoo360.replugin.RePlugin;
+
 /**
  * des:
  * author: libingyan

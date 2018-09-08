@@ -6,11 +6,18 @@ import com.qihoo360.replugin.RePlugin;
 import com.qihoo360.replugin.RePluginCallbacks;
 import com.qihoo360.replugin.RePluginClassLoader;
 import com.qihoo360.replugin.model.PluginInfo;
+import com.qihoo360.replugin.utils.ReflectUtils;
 
 import android.content.Context;
 import android.content.Intent;
 
 import java.io.File;
+import java.lang.reflect.Array;
+import java.lang.reflect.Method;
+import java.util.LinkedList;
+import java.util.List;
+
+import dalvik.system.PathClassLoader;
 
 /**
  * des:
@@ -20,6 +27,8 @@ import java.io.File;
 public class DemoRePluginCallbacks extends RePluginCallbacks {
     private static final String TAG = "DemoRePluginCallbacks";
 
+    private ClassLoader mOriginClassLoader;
+
     public DemoRePluginCallbacks(Context context) {
         super(context);
     }
@@ -27,6 +36,7 @@ public class DemoRePluginCallbacks extends RePluginCallbacks {
     @Override
     public RePluginClassLoader createClassLoader(ClassLoader parent, ClassLoader original) {
         DLog.i(TAG, "createClassLoader() parent: " + parent.getClass().getName() + ", origin: " + original.getClass().getName());
+        mOriginClassLoader = original;
         return super.createClassLoader(parent, original);
     }
 
@@ -36,7 +46,16 @@ public class DemoRePluginCallbacks extends RePluginCallbacks {
         DLog.i(TAG, "createPluginClassLoader() PluginExtra: " + pi + ", dexPath: " + dexPath
             + ", optimizedDirectory: " + optimizedDirectory + ", librarySearchPath: "
             + librarySearchPath + ", parent: " + parent.getClass().getName());
-        return super.createPluginClassLoader(pi, dexPath, optimizedDirectory, librarySearchPath, parent);
+        PluginDexClassLoader pluginDexClassLoader = super.createPluginClassLoader(pi, dexPath,
+                optimizedDirectory, librarySearchPath, parent);
+
+        /**
+         * hook classLoader的native加载目录（可以增加判断条件，金针对so插件做）
+         */
+        boolean hook = HookPathClassLoader.hookNativeLibraryPath(pluginDexClassLoader, mOriginClassLoader);
+        DLog.i(TAG, "hookNativeLibraryPath() result: " + hook);
+
+        return pluginDexClassLoader;
     }
 
     @Override
