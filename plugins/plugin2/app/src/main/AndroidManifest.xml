@@ -33,6 +33,16 @@
             </intent-filter>
         </service>
 
+        <!--静态注册广播-->
+        <receiver android:name=".Plugin2BroadcastReceiver">
+            <intent-filter>
+                <action android:name="com.test.android.plugin2.receiver.ACTION1_TEST" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".Plugin2JobService"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
+
     </application>
 
 </manifest>

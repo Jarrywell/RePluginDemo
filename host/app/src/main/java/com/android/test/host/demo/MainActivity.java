@@ -19,8 +19,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
     private final String TAG = "MainActivity";
@@ -302,6 +304,26 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, normal, Toast.LENGTH_LONG).show();
             }
         });
+
+        /**
+         * 测试插件升级
+         */
+        findViewById(R.id.id_btn_test_update_plugins).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Set<String> plugins = PluginManager.PLUGINS.keySet();
+                for (String plugin : plugins) {
+                    PluginManager.PluginExtra extra = PluginManager.PLUGINS.get(plugin);
+                    if (extra != null) {
+                        File apkFile = new File(extra.apkPath);
+                        if (apkFile.exists() && apkFile.length() > 0) {
+                            RePlugin.install(apkFile.getAbsolutePath());
+                        }
+                    }
+                }
+            }
+        });
+
     }
 
     private final int REQUEST_CODE = 0x0111;

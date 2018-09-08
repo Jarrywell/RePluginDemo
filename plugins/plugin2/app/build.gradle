@@ -6,8 +6,8 @@ android {
         applicationId "com.test.android.plugin2"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        versionCode 7008002
+        versionName "7.8.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         externalNativeBuild {
@@ -18,6 +18,15 @@ android {
             }
         }
     }
+
+    /**
+     * ./gradew assembleDebug 命令行编译有问题,但是用as编译没有问题，待排查
+     */
+    /*compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }*/
+
     buildTypes {
         release {
             minifyEnabled false
@@ -52,7 +61,11 @@ dependencies {
     /**
      * 插件引用宿主类的方式
      */
-    compileOnly files('libs/plugin-utils-lib-1.0.0.jar')
+    if (isPlugin.toBoolean()) {
+        compileOnly files('libs/plugin-utils-lib-1.0.0.jar')
+    } else {
+        implementation files('libs/plugin-utils-lib-1.0.0.jar')
+    }
 }
 
 //task to copy apk to plugins-output/

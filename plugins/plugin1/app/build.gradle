@@ -45,7 +45,11 @@ dependencies {
     /**
      * 插件引用宿主类的方式
      */
-    compileOnly files('libs/plugin-utils-lib-1.0.0.jar')
+    if (isPlugin.toBoolean()) {
+        compileOnly files('libs/plugin-utils-lib-1.0.0.jar')
+    } else {
+        implementation files('libs/plugin-utils-lib-1.0.0.jar')
+    }
 }
 
 
