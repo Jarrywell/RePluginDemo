@@ -84,6 +84,9 @@ public class DemoApplication extends RePluginApplication {
          */
         config.setEventCallbacks(new DemoRePluginEventCallbacks(this));
 
+        // 在Art上，优化第一次loadDex的速度
+        config.setOptimizeArtLoadDex(true);
+
         return config;
     }
 

@@ -6,6 +6,8 @@ import com.qihoo360.replugin.RePlugin;
 import com.qihoo360.replugin.RePluginCallbacks;
 import com.qihoo360.replugin.RePluginClassLoader;
 import com.qihoo360.replugin.model.PluginInfo;
+import com.qihoo360.replugin.utils.Dex2OatUtils;
+import com.qihoo360.replugin.utils.InterpretDex2OatHelper;
 import com.qihoo360.replugin.utils.ReflectUtils;
 
 import android.content.Context;
@@ -46,8 +48,22 @@ public class DemoRePluginCallbacks extends RePluginCallbacks {
         DLog.i(TAG, "createPluginClassLoader() PluginExtra: " + pi + ", dexPath: " + dexPath
             + ", optimizedDirectory: " + optimizedDirectory + ", librarySearchPath: "
             + librarySearchPath + ", parent: " + parent.getClass().getName());
+
+        String odexName = pi.makeInstalledFileName() + ".dex";
+        if (RePlugin.getConfig().isOptimizeArtLoadDex()) {
+            Dex2OatUtils.injectLoadDex(dexPath, optimizedDirectory, odexName);
+        }
+
+        long being = System.currentTimeMillis();
+
         PluginDexClassLoader pluginDexClassLoader = super.createPluginClassLoader(pi, dexPath,
                 optimizedDirectory, librarySearchPath, parent);
+
+        if (BuildConfig.DEBUG) {
+            DLog.d(Dex2OatUtils.TAG, "createPluginClassLoader use:" + (System.currentTimeMillis() - being));
+            String odexAbsolutePath = (optimizedDirectory + File.separator + odexName);
+            DLog.d(Dex2OatUtils.TAG, "createPluginClassLoader odexSize:" + InterpretDex2OatHelper.getOdexSize(odexAbsolutePath));
+        }
 
         /**
          * hook classLoader的native加载目录（可以增加判断条件，金针对so插件做）
