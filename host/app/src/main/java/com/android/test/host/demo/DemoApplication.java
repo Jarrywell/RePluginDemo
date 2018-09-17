@@ -24,7 +24,7 @@ public class DemoApplication extends RePluginApplication {
         DLog.i(TAG, "onCreate()");
 
         //增加签名验证,暂时注释
-        RePlugin.addCertSignature("xxxx");
+        RePlugin.addCertSignature("A9B61A779F3F687A20B26C7A03B4449C");
 
         //是否启用调试器
         RePlugin.enableDebugger(this, BuildConfig.DEBUG);
