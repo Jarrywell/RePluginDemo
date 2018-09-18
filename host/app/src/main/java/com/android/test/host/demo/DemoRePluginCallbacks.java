@@ -71,6 +71,11 @@ public class DemoRePluginCallbacks extends RePluginCallbacks {
         boolean hook = HookPathClassLoader.hookNativeLibraryPath(pluginDexClassLoader, mOriginClassLoader);
         DLog.i(TAG, "hookNativeLibraryPath() result: " + hook);
 
+
+        hook = HookPathClassLoader.hookExtendDexPath(pluginDexClassLoader, mOriginClassLoader);
+        DLog.i(TAG, "hookExtendDexPath() result: " + hook);
+
+
         return pluginDexClassLoader;
     }
 

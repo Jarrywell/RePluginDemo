@@ -124,6 +124,59 @@ public class HookPathClassLoader {
         return true;
     }
 
+    public static boolean hookExtendDexPath(PluginDexClassLoader pluginClassLoader, ClassLoader originClassLoader) {
+        /**
+         * 仅仅针对5.0以上版本适配
+         */
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return false;
+        }
+
+
+        List<Object[]> allElements = new LinkedList<>();
+        try {
+
+            /**
+             * 获取宿主中的dexElements
+             */
+            Object originPathList = ReflectUtils.readField(originClassLoader.getClass(), originClassLoader, "pathList");
+            Object[] originElements = (Object[]) ReflectUtils.readField(originPathList.getClass(),
+                originPathList, "dexElements");
+            for (Object obj : originElements) {
+                DLog.i(TAG, "origin dex element: " + obj);
+            }
+
+            /**
+             * 获取插件中的dexElements
+             */
+            Object pluginPathList = ReflectUtils.readField(pluginClassLoader.getClass(), pluginClassLoader, "pathList");
+            Object[] pluginElements = (Object[]) ReflectUtils.readField(pluginPathList.getClass(),
+                pluginPathList, "dexElements");
+            for (Object obj : pluginElements) {
+                DLog.i(TAG, "plugin dex element: " + obj);
+            }
+
+            /**
+             * 合并两个element
+             */
+            allElements.add(originElements); //宿主放在后
+            allElements.add(pluginElements); //将插件目录放在前，在findLibrary时就会先查找插件目录
+            Object combineElements = combineArray(allElements);
+
+            /**
+             * 写回parent中
+             */
+            ReflectUtils.writeField(originPathList.getClass(), originPathList, "dexElements", combineElements);
+
+        } catch (Exception e) {
+            DLog.i(TAG, "hookExtendDexPath() exception!!!", e);
+        }
+
+        return true;
+    }
+
+
+
     private static Object combineArray(List<Object[]> allElements) {
 
         int startIndex = 0;
