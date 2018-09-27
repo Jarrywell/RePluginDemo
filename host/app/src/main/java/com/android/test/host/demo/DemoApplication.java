@@ -6,8 +6,10 @@ import com.qihoo360.replugin.RePluginApplication;
 import com.qihoo360.replugin.RePluginCallbacks;
 import com.qihoo360.replugin.RePluginConfig;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.os.Bundle;
 
 /**
  * des:
@@ -28,6 +30,8 @@ public class DemoApplication extends RePluginApplication {
 
         //是否启用调试器
         RePlugin.enableDebugger(this, BuildConfig.DEBUG);
+
+        registerActivityLifecycleCallbacks(mActivityLifecycleCallbacks);
     }
 
     @Override
@@ -95,4 +99,41 @@ public class DemoApplication extends RePluginApplication {
         return new DemoRePluginCallbacks(this);
     }
 
+
+    private ActivityLifecycleCallbacks mActivityLifecycleCallbacks = new ActivityLifecycleCallbacks() {
+        @Override
+        public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+            DLog.i(TAG, "onActivityCreated() activity: " + activity);
+        }
+
+        @Override
+        public void onActivityStarted(Activity activity) {
+
+        }
+
+        @Override
+        public void onActivityResumed(Activity activity) {
+
+        }
+
+        @Override
+        public void onActivityPaused(Activity activity) {
+
+        }
+
+        @Override
+        public void onActivityStopped(Activity activity) {
+
+        }
+
+        @Override
+        public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+
+        }
+
+        @Override
+        public void onActivityDestroyed(Activity activity) {
+            DLog.i(TAG, "onActivityDestroyed() activity: " + activity);
+        }
+    };
 }
