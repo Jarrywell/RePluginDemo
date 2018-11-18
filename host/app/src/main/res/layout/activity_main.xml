@@ -144,5 +144,14 @@
             android:text="安装（更新）文件夹中的插件"
             />
 
+        <Button
+            android:id="@+id/id_btn_test_resource"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:layout_marginBottom="10dp"
+            android:text="读取插件中的资源"
+            />
+
     </LinearLayout>
 </ScrollView>

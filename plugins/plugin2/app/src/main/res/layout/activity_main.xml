@@ -29,6 +29,12 @@
             android:layout_marginBottom="10dp"
             />
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/test_plugin2_img"/>
+
         <Button
             android:id="@+id/id_btn_start_jni"
             android:layout_width="match_parent"

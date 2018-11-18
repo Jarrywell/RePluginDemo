@@ -324,6 +324,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.id_btn_test_resource).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, DemoResourceActivity.class));
+            }
+        });
+
     }
 
     private final int REQUEST_CODE = 0x0111;

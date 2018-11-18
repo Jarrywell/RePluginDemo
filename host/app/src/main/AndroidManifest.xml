@@ -26,6 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".DemoFragmentActivity" android:process=":host1"/>
+        <activity android:name=".DemoResourceActivity"/>
 
         <provider
             android:name=".Plugin1FileProvider"
